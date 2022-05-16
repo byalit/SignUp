@@ -40,7 +40,19 @@ const clearErr = (input) => {
     const findInput = input.parentElement;
     findInput.classList.remove("error");
 };
+const checkError = () => {
+    const allInputs = document.querySelectorAll(".form-box")
+    let countErr = 0;
+    allInputs.forEach(el => {
+        if (el.classList.contains("error")) {
+            countErr++;
+        }
 
+    })
+    if (countErr === 0) {
+        popup.classList.add("show-popup")
+    }
+}
 const checkBox = (el) => {
     el.forEach((input) => {
         if (input.value === "") {
@@ -58,12 +70,13 @@ send.addEventListener("click", (e) => {
     checkLength(pass, 8);
     checkPassword(pass, pass2);
     checkEmail(email)
+    checkError()
 });
 
 clear.addEventListener("click", (e) => {
     e.preventDefault();
     [username, pass, pass2, email].forEach((el) => {
         el.value = "";
-      clearErr(el);
+        clearErr(el);
     });
 });
